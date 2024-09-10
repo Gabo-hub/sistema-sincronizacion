@@ -46,7 +46,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.cursordb.execute("SELECT * FROM equipos")
         equipos = self.cursordb.fetchall()
         self.cargarEquiposTabla(equipos)
-
+        self.ui.tree_tabla_equipos.header().setStretchLastSection(False)
+        self.ui.tree_tabla_equipos.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        self.ui.tree_tabla_equipos.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.ui.tree_tabla_equipos.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.ui.tree_tabla_equipos.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         # Mostrar Ventanas
         self.ui.menu_Datos.actions()[0].triggered.connect(lambda: self.buscarDato(self.obtener_tablas()))
         self.ui.menu_Equipos.actions()[0].triggered.connect(lambda: self.equiposDetalles())
@@ -145,6 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Cargar los equipos en la tabla de la interfaz
         for i, equipo in enumerate(equipos):
             self.ui.tree_tabla_equipos.insertTopLevelItems(i, [QtWidgets.QTreeWidgetItem([str(equipo["id_equipos"]),equipo["numero"],equipo["nombre"],equipo["ubicacion"],equipo["ip"], str(equipo["id_estatus"])])])
+            self.ui.tree_tabla_equipos.resizeColumnToContents(i)
 
     def iniciar_servicios(self):
         # Iniciar los servicios si no están en ejecución
