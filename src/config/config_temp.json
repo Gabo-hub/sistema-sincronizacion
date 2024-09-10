@@ -1,0 +1,15 @@
+{
+    "host": "",
+    "database": "",
+    "user": "",
+    "password": "",
+    "tiempo_entrada": 0,
+    "tiempo_salida": 0,
+    "tiempo_taquilla": 0,
+    "tablas": {
+        "table": {
+            "column1": "INT..",
+            "column2": "VARCHAR(50).."
+        }
+    }
+}
